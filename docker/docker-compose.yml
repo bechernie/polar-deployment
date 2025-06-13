@@ -3,8 +3,11 @@ services:
   catalog-service:
     depends_on:
       - fluent-bit
+      - polar-keycloak
       - polar-postgres
+      - tempo
     image: "catalog-service"
+    container_name: catalog-service
     ports:
       - 9001:9001
       - 8001:8001
@@ -14,6 +17,10 @@ services:
       - BPL_DEBUG_PORT=8001
       - SPRING_DATASOURCE_URL=jdbc:postgresql://polar-postgres/polardb_catalog
       - SPRING_PROFILES_ACTIVE=testdata
+      - JAVA_TOOL_OPTIONS=-javaagent:/workspace/BOOT-INF/lib/opentelemetry-javaagent-1.33.3.jar
+      - OTEL_SERVICE_NAME=catalog-service
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4317
+      - OTEL_METRICS_EXPORTER=none
     logging:
       driver: fluentd
       options:
