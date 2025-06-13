@@ -21,6 +21,7 @@ services:
       - OTEL_SERVICE_NAME=catalog-service
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4317
       - OTEL_METRICS_EXPORTER=none
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://polar-keycloak:8080/realms/PolarBookshop
     logging:
       driver: fluentd
       options:
@@ -32,6 +33,7 @@ services:
       - polar-keycloak
       - polar-postgres
       - polar-rabbitmq
+      - tempo
     image: "order-service"
     container_name: "order-service"
     ports:
@@ -50,7 +52,7 @@ services:
       - SPRING_R2DBC_URL=r2dbc:postgresql://polar-postgres:5432/polardb_order
       - SPRING_FLYWAY_URL=jdbc:postgresql://polar-postgres:5432/polardb_order
       - SPRING_RABBITMQ_HOST=polar-rabbitmq
-      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://host.docker.internal:8080/realms/PolarBookshop
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://polar-keycloak:8080/realms/PolarBookshop
     logging:
       driver: fluentd
       options:
@@ -60,6 +62,7 @@ services:
     depends_on:
       - fluent-bit
       - polar-rabbitmq
+      - tempo
     image: "dispatcher-service"
     container_name: dispatcher-service
     ports:
@@ -83,6 +86,7 @@ services:
   edge-service:
     depends_on:
       - fluent-bit
+      - tempo
       - polar-keycloak
       - polar-redis
       - polar-ui
@@ -113,6 +117,7 @@ services:
   config-service:
     depends_on:
       - fluent-bit
+      - tempo
     image: "config-service"
     container_name: "config-service"
     ports:
