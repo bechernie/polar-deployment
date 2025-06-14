@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - github.com/bechernie/dispatcher-service/k8s?ref=main
+
+patches:
+  - path: patch-env.yml
+
+configMapGenerator:
+  - behavior: merge
+    files:
+      - application-staging.yml
+    name: dispatcher-service
+
+images:
+  - name: dispatcher-service
+    newName: ghcr.io/polarbookshop/dispatcher-service
+    newTag: latest
+
+replicas:
+  - name: dispatcher-service
+    count: 2
