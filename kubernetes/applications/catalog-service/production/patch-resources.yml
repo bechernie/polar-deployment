@@ -9,8 +9,8 @@ spec:
         - name: catalog-service
           resources:
             requests:
-              memory: 512Mi
+              memory: 726Mi
               cpu: "0.1"
             limits:
-              memory: 512Mi
+              memory: 726Mi
               cpu: "2"
