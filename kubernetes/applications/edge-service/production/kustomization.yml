@@ -19,7 +19,7 @@ configMapGenerator:
 images:
 - name: edge-service
   newName: ghcr.io/bechernie/edge-service
-  newTag: 1c6c99f92027ebbaabb411bab0cab7a565890432
+  newTag: c1886e10074364d59db0e1d4c746085f09a1ec09
 
 replicas:
 - count: 2
