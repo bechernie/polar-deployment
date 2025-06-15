@@ -18,7 +18,7 @@ configMapGenerator:
 images:
 - name: order-service
   newName: ghcr.io/bechernie/order-service
-  newTag: b5ad3ca0ac37517969e080a5015079e6331ad8f1
+  newTag: 5a763397ae0c8377c9ce56128dee9da9ead88c55
 
 replicas:
 - count: 2
