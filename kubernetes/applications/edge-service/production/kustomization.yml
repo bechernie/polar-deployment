@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - github.com/bechernie/edge-service/k8s?ref=main
+
+patches:
+  - path: patch-ingress.yml
+  - path: patch-env.yml
+  - path: patch-resources.yml
+  - path: patch-volumes.yml
+
+configMapGenerator:
+  - behavior: merge
+    files:
+      - application-prod.yml
+    name: edge-service
+
+images:
+  - name: edge-service
+    newName: ghcr.io/bechernie/edge-service
+    newTag: latest
+
+replicas:
+  - count: 2
+    name: edge-service
+
