@@ -9,8 +9,8 @@ spec:
         - name: edge-service
           resources:
             requests:
-              memory: 256Mi
+              memory: 512Mi
               cpu: "0.1"
             limits:
-              memory: 256Mi
+              memory: 512Mi
               cpu: "2"
