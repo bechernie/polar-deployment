@@ -18,7 +18,7 @@ configMapGenerator:
 images:
 - name: catalog-service
   newName: ghcr.io/bechernie/catalog-service
-  newTag: 3099d746c2d88ceb3d9911803fa7836f84a7e17d
+  newTag: 4c926c2a70029d3bf865fe07de55d7d48d98bf1b
 
 replicas:
 - count: 2
