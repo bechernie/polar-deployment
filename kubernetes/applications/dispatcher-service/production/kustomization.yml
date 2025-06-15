@@ -18,7 +18,7 @@ configMapGenerator:
 images:
 - name: dispatcher-service
   newName: ghcr.io/bechernie/dispatcher-service
-  newTag: 0b6de3ae8b86d3dea897dff466e3aa59da507e0d
+  newTag: 7fe55ebc44445639e68a08bc9adc8793ebd0aac0
 
 replicas:
 - count: 2
